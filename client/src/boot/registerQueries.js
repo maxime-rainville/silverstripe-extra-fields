@@ -1,12 +1,8 @@
-import Injector from 'lib/Injector';
-import { fileInterface, file } from 'lib/fileFragments';
-import readFilesQuery from 'state/files/readFilesQuery';
-import readFileUsageQuery from 'state/files/readFileUsageQuery';
+// import Injector from 'lib/Injector';
+
 
 const registerQueries = () => {
-  Injector.query.registerFragment('FileInterfaceFields', fileInterface);
-  Injector.query.registerFragment('FileFields', file);
-  Injector.query.register('ReadFilesQuery', readFilesQuery);
-  Injector.query.register('readFileUsageQuery', readFileUsageQuery);
+  // Injector.query.registerFragment('FileInterfaceFields', fileInterface);
+  // Injector.query.register('ReadFilesQuery', readFilesQuery);
 };
 export default registerQueries;
