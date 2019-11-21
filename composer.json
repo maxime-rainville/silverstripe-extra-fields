@@ -1,0 +1,39 @@
+{
+    "name": "maximerainville/silverstripe-extra-field",
+    "description": "Asset management for the SilverStripe CMS",
+    "type": "silverstripe-vendormodule",
+    "license": "BSD-3-Clause",
+    "require": {
+        "silverstripe/admin": "^1",
+        "silverstripe/framework": "^4",
+        "silverstripe/graphql": "^3",
+        "silverstripe/vendor-plugin": "^1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "silverstripe/cms": "^4",
+        "silverstripe/campaign-admin": "^1"
+    },
+    "extra": {
+        "expose": [
+            "client/dist",
+            "client/lang"
+        ]
+    },
+    "scripts": {
+        "lint": "phpcs -s code/ tests/",
+        "lint-clean": "phpcbf code/ tests/"
+    },
+    "autoload": {
+        "psr-4": {
+            "MaximeRainville\\ExtraField\\": "code/",
+            "MaximeRainville\\ExtraField\\Tests\\": "tests/php/",
+            "MaximeRainville\\ExtraField\\Tests\\Behat\\Context\\": "tests/behat/src/"
+        }
+    },
+    "config": {
+        "process-timeout": 600
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
