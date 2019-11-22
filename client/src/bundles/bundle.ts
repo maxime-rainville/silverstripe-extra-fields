@@ -6,3 +6,5 @@
 // require('expose-loader?InsertMediaModal!containers/InsertMediaModal/InsertMediaModal');
 
 require('boot');
+
+require('entwine/SwitchFieldEntwine');
