@@ -13,24 +13,36 @@ interface SwitchWrapperProps {
   rightTitle?: string,
   hideLabels?: true,
   leftTitle?: string,
-  noHolder?: true,
+  noHolder?: boolean,
+  checked?: boolean,
+  type?: string,
 }
 
-const SwitchWrapper = ({extraClass, rightTitle, hideLabels, leftTitle, noHolder, ...props}: SwitchWrapperProps) => (
-  <Switch className={classnames(extraClass)} {...props} />
-);
+const SwitchWrapper = ({extraClass, rightTitle, hideLabels, leftTitle, noHolder, type, ...props}: SwitchWrapperProps) => {
+  return <Switch {...props} className={classnames(extraClass)} />;
+};
 
 const SwitchField = ({checkstart, onChange, ...props}: SwitchFieldProps) => {
-  const [checked, setChecked] = useState(checkstart || false);
+  let toggle: ((e: Event) => void) | undefined;
+  let checked: undefined|boolean;
 
-  const toggle = (event: Event) => {
-    setChecked(!checked)
-    if (onChange) {
-      onChange(event);
-    }
-  };
+  if (typeof checkstart === 'undefined') {
+    console.log('checkstart undefined');
+    toggle = onChange;
+  } else {
+    const [checked, setChecked] = useState(checkstart || false);
+    toggle = (event: Event) => {
+      console.log('changing');
+      setChecked(!checked)
+      if (onChange) {
+        onChange(event);
+      }
+    };
+  }
 
   const FieldHolder:any = fieldHolder(SwitchWrapper);
+
+  // console.dir(props)
   return <FieldHolder checked={checked} onChange={toggle} {...props} />;
 };
 
