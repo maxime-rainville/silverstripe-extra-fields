@@ -27,7 +27,7 @@ jQuery.entwine('ss', ($: JQueryStatic) => {
    */
   $('.js-injector-boot input.entwine-switchfield').entwine({
     Component: null,
-    props: null,
+    // props: null,
 
     getContainer() {
       let container = this.siblings('.switchfield-holder')[0];
@@ -83,12 +83,11 @@ jQuery.entwine('ss', ($: JQueryStatic) => {
       }
 
       const name = $(this).attr('name');
-      const value = $(this).attr('value');
-      const checkstart = $(this).attr('checked') ? true : false;
+      const value = $(this).attr('checked') ? true : false;
       const disabled = $(this).attr('disabled') ? true : false;
       const readOnly = $(this).attr('readonly') ? true : false;
 
-      $(this).data('reactprop', {name, value, checkstart, disabled, readOnly});
+      $(this).data('reactprop', {name, value, disabled, readOnly});
       $(this).removeAttr('name');
       return $(this).data('reactprop');
     },

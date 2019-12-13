@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, ChangeEvent} from 'react';
 import fieldHolder from 'components/FieldHolder/FieldHolder';
 import Switch from '@material-ui/core/Switch';
 import classnames from 'classnames';
@@ -9,41 +9,55 @@ interface SwitchFieldProps {
 }
 
 interface SwitchWrapperProps {
-  extraClass?: string,
-  rightTitle?: string,
-  hideLabels?: true,
-  leftTitle?: string,
-  noHolder?: boolean,
-  checked?: boolean,
-  type?: string,
+  extraClass?: string
+  checked?: boolean
+  value?: boolean
+  // onChange?: (e: ChangeEvent<HTMLInputElement>, checked: boolean) => void
+  onChange?: any
+
+  name: string
+  checkedIcon?: HTMLElement
+  color?: 'primary' | 'secondary' | 'default'
+  disabled?: boolean
+  disableRipple?: boolean
+  edge?: 'start' | 'end' | false
+  icon?: HTMLElement
+  id?: string
+  inputProps?: any
+  required?: true
 }
 
-const SwitchWrapper = ({extraClass, rightTitle, hideLabels, leftTitle, noHolder, type, ...props}: SwitchWrapperProps) => {
-  return <Switch {...props} className={classnames(extraClass)} />;
-};
-
-const SwitchField = ({checkstart, onChange, ...props}: SwitchFieldProps) => {
-  let toggle: ((e: Event) => void) | undefined;
-  let checked: undefined|boolean;
-
-  if (typeof checkstart === 'undefined') {
-    console.log('checkstart undefined');
-    toggle = onChange;
-  } else {
-    const [checked, setChecked] = useState(checkstart || false);
-    toggle = (event: Event) => {
-      console.log('changing');
-      setChecked(!checked)
-      if (onChange) {
-        onChange(event);
-      }
-    };
+const SwitchWrapper = ({value, onChange, extraClass, ...props}: SwitchWrapperProps) => {
+  const [checked, setChecked] = useState(value ?  true : false);
+  const toggle = (e: ChangeEvent<HTMLInputElement>, eventChecked: boolean) => {
+    setChecked(eventChecked);
+    if (onChange) {
+      onChange(e, {id: props.id, value: eventChecked ? 1 : 0});
+    }
   }
 
-  const FieldHolder:any = fieldHolder(SwitchWrapper);
+  const switchProps = {
+    onChange: toggle,
+    checked,
+    value: 1,
+    // checkedIcon: props.checkedIcon,
+    color: props.color,
+    disabled: props.disabled,
+    disableRipple: props.disableRipple,
+    edge: props.edge,
+    // icon: props.icon,
+    id: props.id,
+    inputProps: props.inputProps,
+    required: props.required,
+    name: props.name
+  }
 
-  // console.dir(props)
-  return <FieldHolder checked={checked} onChange={toggle} {...props} />;
+  return <Switch {...switchProps} className={classnames(extraClass)} />;
+};
+
+const SwitchField = (props: SwitchFieldProps) => {
+  const FieldHolder:any = fieldHolder(SwitchWrapper);
+  return <FieldHolder {...props} />;
 };
 
 export { SwitchField as Component };
