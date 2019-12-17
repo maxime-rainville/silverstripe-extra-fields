@@ -3,11 +3,6 @@ import fieldHolder from 'components/FieldHolder/FieldHolder';
 import Switch from '@material-ui/core/Switch';
 import classnames from 'classnames';
 
-interface SwitchFieldProps {
-  checkstart?: boolean,
-  onChange?: (event: Event) => void
-}
-
 interface SwitchWrapperProps {
   extraClass?: string
   checked?: boolean
@@ -55,7 +50,7 @@ const SwitchWrapper = ({value, onChange, extraClass, ...props}: SwitchWrapperPro
   return <Switch {...switchProps} className={classnames(extraClass)} />;
 };
 
-const SwitchField = (props: SwitchFieldProps) => {
+const SwitchField = (props: SwitchWrapperProps) => {
   const FieldHolder:any = fieldHolder(SwitchWrapper);
   return <FieldHolder {...props} />;
 };

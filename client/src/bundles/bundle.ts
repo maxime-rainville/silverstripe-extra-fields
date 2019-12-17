@@ -8,3 +8,4 @@
 require('boot');
 
 require('entwine/SwitchFieldEntwine');
+require('entwine/RangeFieldEntwine');
